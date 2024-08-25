@@ -1,0 +1,161 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e8f1f5;
+  color: #333;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.left-panel {
+  width: 25%;
+  background-color: #d1e0e5;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  border-right: 1px solid #b0c4cd;
+}
+
+.left-panel ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.left-panel li {
+  cursor: pointer;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background-color: #f0f5f7;
+  color: #007bff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.left-panel li:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.left-panel li.active {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.right-panel {
+  width: 75%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f3f9fc;
+}
+
+.component {
+  border: 1px solid #b0c4cd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-box {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border-radius: 10px 10px 0 0;
+  margin: -15px -15px 15px -15px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.row {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box {
+  border: 1px solid #b0c4cd;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #f0f7fa;
+}
+
+.details {
+  margin-bottom: 15px;
+}
+
+.details div {
+  margin-bottom: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  background-color: #e8f1f5;
+}
+
+table thead {
+  background-color: #d1e0e5;
+}
+
+table input {
+  width: 60px;
+  padding: 4px;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.remarks {
+  margin-top: 15px;
+}
+
+.remark-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.remark-row label {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.short-input {
+  flex: 1;
+  max-width: 200px;
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 30px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
