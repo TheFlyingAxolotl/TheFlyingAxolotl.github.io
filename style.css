@@ -5,6 +5,14 @@ body {
   color: #333;
 }
 
+scannerContainer {
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  border: 2px solid #ccc;
+  overflow: hidden;
+}
+
 .container {
   display: flex;
   height: 100vh;
@@ -98,7 +106,8 @@ table {
   border-collapse: collapse;
 }
 
-table th, table td {
+table th,
+table td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: center;
