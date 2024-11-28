@@ -2,71 +2,27 @@
 <html lang="en">
 
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script> <!-- this is just to import the barcode scanner-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div id="interactive" class="viewport"></div>
     <title>Vision Screening</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div class="component" id="barcodeScannerComponent">
+        <button id="startScanButton" class="submit-button">Scan Barcode</button>
+        <div id="scannerContainer" style="display: none;">
+            <video id="scannerPreview"></video>
+        </div>
+        <p id="barcodeResult"></p>
+    </div>
+    
     <div class="container">
         <div class="left-panel">
             <ul id="nameList">
-                <!-- List of students -->
-                <li onclick="setPatient('Kai Tan', 'S1234567A', 'Male', '01-01-2016', 'Nanyang Primary School', 'P1')">
-                    Kai Tan</li>
-                <li
-                    onclick="setPatient('Sandy Lim', 'S1234567B', 'Female', '02-02-2015', 'Raffles Primary School', 'P2')">
-                    Sandy Lim</li>
-                <li
-                    onclick="setPatient('Jia Wei', 'S1234567C', 'Male', '03-03-2014', 'Hwa Chong Primary School', 'P3')">
-                    Jia Wei</li>
-                <li
-                    onclick="setPatient('Ming Chen', 'S1234567D', 'Male', '04-04-2016', 'Nanyang Primary School', 'P1')">
-                    Ming Chen</li>
-                <li
-                    onclick="setPatient('Jasmine Ng', 'S1234567E', 'Female', '05-05-2015', 'Singapore Chinese Girls\' School', 'P2')">
-                    Jasmine Ng</li>
-                <li onclick="setPatient('Ricky Lee', 'S1234567F', 'Male', '06-06-2014', 'Anglo-Chinese School', 'P3')">
-                    Ricky Lee</li>
-                <li
-                    onclick="setPatient('Aisha Rahman', 'S1234567G', 'Female', '07-07-2016', 'Bukit Panjang Government High School', 'P1')">
-                    Aisha Rahman</li>
-                <li onclick="setPatient('Ryan Ho', 'S1234567H', 'Male', '08-08-2015', 'Nan Hua Primary School', 'P2')">
-                    Ryan Ho</li>
-                <li
-                    onclick="setPatient('Lina Tan', 'S1234567I', 'Female', '09-09-2014', 'Maris Stella High School', 'P3')">
-                    Lina Tan</li>
-                <li
-                    onclick="setPatient('Hui Ling', 'S1234567J', 'Female', '10-10-2016', 'Nanyang Primary School', 'P1')">
-                    Hui Ling</li>
-                <li
-                    onclick="setPatient('Zhang Wei', 'S1234567K', 'Male', '11-11-2015', 'Singapore American School', 'P2')">
-                    Zhang Wei</li>
-                <li onclick="setPatient('Nina Ong', 'S1234567L', 'Female', '12-12-2014', 'Dunman High School', 'P3')">
-                    Nina Ong</li>
-                <li
-                    onclick="setPatient('Daniel Goh', 'S1234567M', 'Male', '13-01-2016', 'Kuo Chuan Presbyterian Primary School', 'P1')">
-                    Daniel Goh</li>
-                <li
-                    onclick="setPatient('Chen Li', 'S1234567N', 'Female', '14-02-2015', 'Raffles Girls\' Primary School', 'P2')">
-                    Chen Li</li>
-                <li
-                    onclick="setPatient('Felicia Yeo', 'S1234567O', 'Female', '15-03-2014', 'Hwa Chong International School', 'P3')">
-                    Felicia Yeo</li>
-                <li
-                    onclick="setPatient('Kenny Lee', 'S1234567P', 'Male', '16-04-2016', 'Nanyang Primary School', 'P1')">
-                    Kenny Lee</li>
-                <li
-                    onclick="setPatient('Siti Aishah', 'S1234567Q', 'Female', '17-05-2015', 'Singapore Chinese Girls\' School', 'P2')">
-                    Siti Aishah</li>
-                <li onclick="setPatient('Alex Lim', 'S1234567R', 'Male', '18-06-2014', 'Anglo-Chinese School', 'P3')">
-                    Alex Lim</li>
-                <li
-                    onclick="setPatient('Zoe Tan', 'S1234567S', 'Female', '19-07-2016', 'Nan Hua Primary School', 'P1')">
-                    Zoe Tan</li>
-                <li onclick="setPatient('Farhan Ahmad', 'S1234567T', 'Male', '20-08-2015', 'Dunman High School', 'P2')">
-                    Farhan Ahmad</li>
+              <!-- List will be dynamically populated by JavaScript -->
             </ul>
         </div>
         <div class="right-panel">
@@ -78,14 +34,14 @@
                 <div class="box">
                     <div class="patient-details">
                         <div class="detail-row">
-                            <div><strong>Name:</strong> <span id="patientName">Kai Tan</span></div>
-                            <div><strong>NRIC:</strong> <span id="patientNRIC">S1234567A</span></div>
-                            <div><strong>Gender:</strong> <span id="patientGender">Male</span></div>
-                            <div><strong>Birthdate:</strong> <span id="patientBirthdate">01-01-2016</span></div>
+                            <div><strong>Name:</strong> <span id="patientName"></span></div>
+                            <div><strong>NRIC:</strong> <span id="patientNRIC"></span></div>
+                            <div><strong>Gender:</strong> <span id="patientGender"></span></div>
+                            <div><strong>Birthdate:</strong> <span id="patientBirthdate"></span></div>
                         </div>
                         <div class="detail-row">
-                            <div><strong>School:</strong> <span id="patientSchool">Nanyang Primary School</span></div>
-                            <div><strong>Level:</strong> <span id="patientLevel">P1</span></div>
+                            <div><strong>School:</strong> <span id="patientSchool"></span></div>
+                            <div><strong>Level:</strong> <span id="patientLevel"></span></div>
                         </div>
                     </div>
                 </div>
@@ -160,6 +116,9 @@
             </div>
 
             <div class="component" id="component3">
+
+                <form id="withoutPinholeScreeningForm" action="/submit1" method="POST">
+                
                 <div class="header-box">Vision Screening Without Pinhole</div>
                 <div class="table-wrapper">
                     <table>
@@ -187,35 +146,35 @@
                         <tbody>
                             <tr>
                                 <td colspan="2">w/o glasses</td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" id="without_right_1_base"></td>
+                                <td><input type="text" id="without_right_1_char"></td>
+                                <td><input type="number" id="without_right_1_value"></td>
                                 <td></td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="without_left_1_base"></td>
+                                <td><input type="text" name="without_left_1_char"></td>
+                                <td><input type="number" name="without_left_1_value"></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td colspan="2">w glasses</td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="without_right_2_base"></td>
+                                <td><input type="text" name="without_right_2_char"></td>
+                                <td><input type="number" name="without_right_2_value"></td>
                                 <td></td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="without_left_2_base"></td>
+                                <td><input type="text" name="without_left_2_char"></td>
+                                <td><input type="number" name="without_left_2_value"></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td colspan="2">w lenses</td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="without_right_3_base"></td>
+                                <td><input type="text" name="without_right_3_char"></td>
+                                <td><input type="number" name="without_right_3_value"></td>
                                 <td></td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="without_left_3_base"></td>
+                                <td><input type="text" name="without_left_3_char"></td>
+                                <td><input type="number" name="without_left_3_value"></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -224,7 +183,7 @@
                 <div class="remarks">
                     <div class="remark-row">
                         <label for="logMARRemarks">LogMAR Remarks:</label>
-                        <input type="text" id="logMARRemarks" class="short-input">
+                        <input type="text" id="logMARRemarksWithoutPinhole" name="logMARRemarksWithoutPinhole" class="short-input">
                     </div>
                     <div>
                         <input type="checkbox" id="absent">
@@ -235,12 +194,18 @@
                         <label for="financialAssistance">Student on Financial Assistance</label>
                     </div>
                     <div>
-                        <button type="button" class="submit-button">Submit</button>
+                        <button type="submit" class="submit-button">Submit</button>
                     </div>
                 </div>
+
+                </form>
+                    
             </div>
 
             <div class="component" id="component4">
+
+                <form id="withPinholeScreeningForm" action="/submit2" method="POST">
+                
                 <div class="header-box">Vision Screening With Pinhole</div>
                 <div class="table-wrapper">
                     <table>
@@ -268,35 +233,35 @@
                         <tbody>
                             <tr>
                                 <td colspan="2">w/o glasses</td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="with_right_1_base"></td>
+                                <td><input type="text" name="with_right_1_char"></td>
+                                <td><input type="number" name="with_right_1_value"></td>
                                 <td></td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="with_left_1_base"></td>
+                                <td><input type="text" name="with_left_1_char"></td>
+                                <td><input type="number" name="with_left_1_value"></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td colspan="2">w glasses</td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="with_right_2_base"></td>
+                                <td><input type="text" name="with_right_2_char"></td>
+                                <td><input type="number" name="with_right_2_value"></td>
                                 <td></td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="with_left_2_base"></td>
+                                <td><input type="text" name="with_left_2_char"></td>
+                                <td><input type="number" name="with_left_2_value"></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td colspan="2">w lenses</td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="with_right_3_base"></td>
+                                <td><input type="text" name="with_right_3_char"></td>
+                                <td><input type="number" name="with_right_3_value"></td>
                                 <td></td>
-                                <td><input type="number"></td>
-                                <td><input type="text"></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="with_left_3_base"></td>
+                                <td><input type="text" name="with_left_3_char"></td>
+                                <td><input type="number" name="with_left_3_value"></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -306,7 +271,7 @@
                 <div class="remarks">
                     <div class="remark-row">
                         <label for="logMARRemarksWithPinhole">LogMAR Remarks:</label>
-                        <input type="text" id="logMARRemarksWithPinhole" class="short-input">
+                        <input type="text" id="logMARRemarksWithPinhole" name="logMARRemarksWithPinhole" class="short-input">
                     </div>
                     <div>
                         <input type="checkbox" id="absentWithPinhole">
@@ -317,10 +282,14 @@
                         <label for="financialAssistanceWithPinhole">Student on Financial Assistance</label>
                     </div>
                     <div>
-                        <button type="button" class="submit-button">Submit</button>
+                        <button type="submit" class="submit-button">Submit</button>
                     </div>
                 </div>
+
+                </form>
+                
             </div>
+            
         </div>
     </div>
     <script src="script.js"></script>
